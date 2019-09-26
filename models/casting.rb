@@ -24,4 +24,10 @@ class Casting
     @id = id_hash['id'].to_i
   end
 
+  def self.all()
+    sql = "SELECT * FROM castings"
+    castings = SqlRunner.run(sql)
+    return castings.map {|casting| Casting.new(casting)}
+  end
+
 end

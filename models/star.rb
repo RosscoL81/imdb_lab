@@ -32,10 +32,22 @@ class Star
     SqlRunner.run(sql, values)
   end
 
+  def delete()
+    sql = "DELETE FROM stars
+    WHERE id = $1"
+    values = [@id]
+    SqlRunner.run(sql, values)
+  end
+
   def self.all()
     sql = "SELECT * FROM stars"
     stars = SqlRunner.run(sql)
     return stars.map{|star| Star.new(star)}
+  end
+
+  def self.delete_all()
+    sql = "DELETE FROM stars"
+    SqlRunner.run(sql)
   end
 
 

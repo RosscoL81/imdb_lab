@@ -24,12 +24,6 @@ class Casting
     @id = id_hash['id'].to_i
   end
 
-  def self.all()
-    sql = "SELECT * FROM castings"
-    castings = SqlRunner.run(sql)
-    return castings.map {|casting| Casting.new(casting)}
-  end
-
   def update()
     sql = "UPDATE castings SET
     (movie_id, star_id, fee)
@@ -38,5 +32,26 @@ class Casting
     values = [@movie_id, @star_id, @fee, @id]
     SqlRunner.run(sql, values)
   end
+
+  def delete()
+    sql = "DELETE FROM castings
+    WHERE id = $1"
+    values = [@id]
+    SqlRunner.run(sql, values)
+  end
+  
+
+  def self.all()
+    sql = "SELECT * FROM castings"
+    castings = SqlRunner.run(sql)
+    return castings.map {|casting| Casting.new(casting)}
+  end
+
+  def self.delete_all()
+    sql = "DELETE FROM castings"
+    SqlRunner.run(sql)
+  end
+
+
 
 end

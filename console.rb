@@ -3,6 +3,10 @@ require_relative('models/casting')
 require_relative('models/movie')
 require_relative('models/star')
 
+Casting.delete_all()
+Movie.delete_all()
+Star.delete_all()
+
 movie1 = Movie.new({'title' => 'Toy Story', 'genre' => 'family'})
 movie1.save
 

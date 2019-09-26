@@ -12,4 +12,15 @@ class Star
     @last_name = options['last_name']
   end
 
+  def save()
+    sql = "INSERT INTO stars
+    (first_name, last_name)
+    VALUES
+    ($1, $2)
+    RETURNING id"
+    values = [@first_name, @last_name]
+    id_hash = SqlRunner.run(sql, values).first
+    @id = id_hash['id'].to_i
+  end
+
 end
